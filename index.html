@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NexaDesk | AI Support Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Authentication -->
+    <div id="authRoot" class="auth-root"></div>
+
+    <!-- Main Application -->
+    <div class="app-shell" id="appShell" hidden>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-mark">N</div>
+
+                <div>
+                    <b>NexaDesk</b>
+                    <small>SUPPORT INTELLIGENCE</small>
+                </div>
+            </div>
+
+            <div class="workspace">
+                <div class="workspace-icon">N</div>
+
+                <div>
+                    <b>Nexa Commerce</b>
+                    <small>Business workspace</small>
+                </div>
+
+                <span>⌄</span>
+            </div>
+
+            <!-- Main Navigation -->
+            <div class="nav-label">WORKSPACE</div>
+
+            <nav id="mainNav">
+
+                <button class="nav-item active" data-page="overview">
+                    <span>◫</span>
+                    Overview
+                </button>
+
+                <button class="nav-item" data-page="inbox">
+                    <span>▤</span>
+                    Ticket inbox
+                    <em id="navOpenCount">0</em>
+                </button>
+
+                <button class="nav-item" data-page="customers">
+                    <span>♙</span>
+                    Customers
+                </button>
+
+                <button class="nav-item" data-page="knowledge">
+                    <span>▧</span>
+                    Knowledge base
+                </button>
+
+                <button class="nav-item" data-page="assistant">
+                    <span>✳</span>
+                    AI assistant
+                    <i class="new-pill">AI</i>
+                </button>
+
+                <div class="nav-label second">INSIGHTS</div>
+
+                <button class="nav-item" data-page="analytics">
+                    <span>▥</span>
+                    Analytics
+                </button>
+
+                <button class="nav-item" data-page="team">
+                    <span>♧</span>
+                    Team & agents
+                </button>
+
+                <div class="nav-label second">PREFERENCES</div>
+
+                <button class="nav-item" data-page="settings">
+                    <span>⚙</span>
+                    Settings
+                </button>
+
+            </nav>
+
+            <!-- Sidebar Bottom -->
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+                    <div class="help-icon">?</div>
+
+                    <b>Need a hand?</b>
+
+                    <p>
+                        Visit our help center for quick answers.
+                    </p>
+
+                    <button id="helpBtn">
+                        Open help center ↗
+                    </button>
+                </div>
+
+                <div class="profile-mini">
+
+                    <div class="avatar purple" id="sidebarAvatar">
+                        HP
+                    </div>
+
+                    <div>
+                        <b id="sidebarUserName">User</b>
+                        <small id="sidebarUserRole">Agent</small>
+                    </div>
+
+                    <button id="profileMenu" aria-label="Profile menu">
+                        •••
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <!-- Top Navigation -->
+            <header class="topbar">
+
+                <button class="mobile-menu" id="mobileMenu">
+                    ☰
+                </button>
+
+                <div class="crumb">
+                    Workspace
+                    <span>/</span>
+                    <b id="crumbPage">Overview</b>
+                </div>
+
+                <div class="top-actions">
+
+                    <div class="search-global">
+                        <span>⌕</span>
+
+                        <input
+                            id="globalSearch"
+                            type="search"
+                            placeholder="Search tickets, customers..."
+                        >
+
+                        <kbd>⌘ K</kbd>
+                    </div>
+
+                    <button
+                        class="icon-btn"
+                        id="notificationBtn"
+                        title="Notifications"
+                    >
+                        ♧
+                        <i></i>
+                    </button>
+
+                    <button
+                        class="avatar purple top-avatar"
+                        id="topProfile"
+                        aria-label="User profile"
+                    >
+                        HP
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- Dynamic Page Content -->
+            <section
+                class="content"
+                id="content"
+            >
+
+                <div class="loading-state">
+                    Loading NexaDesk workspace...
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Notifications -->
+    <div
+        class="toast-region"
+        id="toasts"
+        aria-live="polite"
+    ></div>
+
+    <!-- Modal -->
+    <div
+        class="modal-backdrop hidden"
+        id="modalBackdrop"
+    >
+
+        <div
+            class="modal"
+            id="modal"
+            role="dialog"
+            aria-modal="true"
+        ></div>
+
+    </div>
+
+    <!-- Socket.IO Client -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Main Application JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>
