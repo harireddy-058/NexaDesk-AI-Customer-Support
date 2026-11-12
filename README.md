@@ -1,72 +1,115 @@
-
 # NexaDesk — AI Customer Support Intelligence Platform
 
-NexaDesk is a full-stack customer-support management platform designed to help support teams manage customer tickets, organize knowledge resources, and generate AI-assisted support answers.
+NexaDesk is a full-stack customer support management platform designed to help support teams manage customer queries, organize support tickets, collaborate with team members and generate AI-assisted responses.
 
-## Features
+The platform combines a browser-based dashboard with a Node.js and Express backend, MongoDB database, JWT authentication and real-time communication through Socket.IO.
 
-### 1. Authentication and Access Control
-- User registration and login
-- JWT-based authentication
-- Password hashing with bcrypt
-- Role-based access control
-- Admin, manager and agent roles
+## Project Overview
 
-### 2. Ticket Management
-- Create and manage customer tickets
-- Track ticket status and priority
-- Assign tickets to team members
-- Add replies to customer conversations
-- Search and filter tickets
-- Record ticket activity
+NexaDesk brings customer support operations into one centralized workspace. It provides ticket management, customer information, knowledge-base resources, analytics and an AI-assisted support workflow.
 
-### 3. Customer Directory
-- View customers from ticket records
-- Search customer information
-- Review customer ticket history
+## Key Features
 
-### 4. Knowledge Base
-- Create and manage knowledge articles
-- Organize articles by category
-- Search support documentation
-- Use approved articles as AI context
+### Authentication and Security
+- JWT-based user authentication.
+- Secure password hashing using bcrypt.
+- Role-based access control.
+- Admin, manager and agent roles.
+- Protected API endpoints.
 
-### 5. AI Support Assistant
-- Search relevant knowledge articles
-- Generate answers from retrieved content
-- Optional OpenAI Responses API integration
-- Fallback to local knowledge search
+### Ticket Management
+- Create, view and update support tickets.
+- Track ticket status and priority.
+- Assign tickets to team members.
+- Manage ticket conversation replies.
+- Search and filter support tickets.
 
-### 6. Analytics
-- Ticket status statistics
-- Ticket priority statistics
-- Resolution-rate calculation
-- CSV report export
+### Customer Management
+- View customer information from ticket records.
+- Access customer-related ticket history.
+- Search customer records.
 
-### 7. Real-Time Updates
-- Socket.IO connection
-- Ticket creation events
-- Ticket update events
-- Ticket deletion events
+### AI Support Assistant
+- Retrieve relevant knowledge-base articles.
+- Generate support answers using retrieved information.
+- Optional OpenAI Responses API integration.
+- Local fallback when an OpenAI API key is unavailable.
 
-### 8. Audit Logging
-- Record important user actions
-- Track ticket operations
-- Record account activity
+### Knowledge Base
+- Create and manage support articles.
+- Organize knowledge resources by category.
+- Retrieve relevant articles for support questions.
+
+### Analytics
+- View ticket statistics and support activity.
+- Monitor ticket status and priority distribution.
+- Export available analytics data.
+
+### Real-Time Communication
+- Socket.IO integration.
+- Real-time ticket creation and updates.
+- Live synchronization between connected dashboard sessions.
+
+### Team Management
+- View team members.
+- Manage roles with administrator permissions.
+- Activate and deactivate accounts.
 
 ## Technology Stack
 
-| Layer | Technology |
+| Layer | Technologies |
 |---|---|
-| Frontend | HTML, CSS, JavaScript |
+| Frontend | HTML5, CSS3, JavaScript |
 | Backend | Node.js, Express.js |
 | Database | MongoDB |
 | ODM | Mongoose |
 | Authentication | JWT |
-| Password Security | bcryptjs |
-| Real-time Communication | Socket.IO |
-| AI Integration | OpenAI API |
-| Charts | Chart.js |
+| Password Security | bcrypt |
+| Real-Time Communication | Socket.IO |
+| AI Integration | OpenAI API (optional) |
+| Development Tools | VS Code, Git, GitHub |
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    A[User] --> B[NexaDesk Dashboard]
+    B --> C[HTML CSS JavaScript]
+    C --> D[Express REST API]
+    C <-->|Live Events| E[Socket.IO]
+    D --> F[JWT Authentication]
+    D --> G[Business Logic and Routes]
+    G --> H[MongoDB]
+    G --> I[AI Support Service]
+    I --> J[Knowledge Retrieval]
+    J --> H
+    I --> K[Optional OpenAI API]
+    E --> D
+```
+
+## Application Screenshots
+
+Add your application screenshots to `docs/screenshots/` and use these image references:
+
+### Login Page
+
+![NexaDesk Login](docs/screenshots/01-login.png)
+
+### Dashboard Overview
+
+![NexaDesk Dashboard](docs/screenshots/02-dashboard.png)
+
+### Ticket Management
+
+![NexaDesk Ticket Inbox](docs/screenshots/03-tickets.png)
+
+### AI Support Assistant
+
+![NexaDesk AI Assistant](docs/screenshots/04-ai-assistant.png)
+
+### Analytics Dashboard
+
+![NexaDesk Analytics](docs/screenshots/05-analytics.png)
 
 ## Project Structure
 
@@ -78,81 +121,63 @@ NexaDesk/
 ├── app.js
 ├── README.md
 │
+├── docs/
+│   └── screenshots/
+│
 └── server/
     ├── package.json
-    ├── .env
     ├── .env.example
+    ├── README.md
     │
     └── src/
         ├── server.js
         ├── seed.js
-        │
         ├── config/
-        │   └── db.js
-        │
         ├── middleware/
-        │   ├── auth.js
-        │   └── errors.js
-        │
         ├── models/
-        │   ├── User.js
-        │   ├── Ticket.js
-        │   ├── KnowledgeDocument.js
-        │   └── AuditLog.js
-        │
         ├── routes/
-        │   ├── auth.js
-        │   ├── tickets.js
-        │   ├── knowledge.js
-        │   └── team.js
-        │
         ├── services/
-        │   └── ai.js
-        │
         └── utils/
-            └── audit.js
 ```
 
-## Requirements
+## Installation and Setup
 
-Install the following before running the application:
+### Requirements
+- Node.js 20 or later.
+- npm.
+- MongoDB local instance or MongoDB Atlas.
 
-- Node.js
-- npm
-- MongoDB Community Server
+### 1. Clone the repository
 
-## Installation
+```bash
+git clone https://github.com/harireddy-058/NexaDesk-AI-Customer-Support.git
+cd NexaDesk-AI-Customer-Support
+```
 
-### Step 1: Install backend dependencies
-
-Open the terminal in the main project folder:
+### 2. Install backend dependencies
 
 ```bash
 cd server
 npm install
 ```
 
-### Step 2: Configure environment variables
+### 3. Configure environment variables
 
-Create the `server/.env` file using `.env.example` as a reference.
+```bash
+cp .env.example .env
+```
 
-Set:
-- MongoDB connection string
-- JWT secret
-- Server port
-- Optional OpenAI API key
+Configure MongoDB and JWT settings in `server/.env`. Add an OpenAI API key if you want to enable the optional AI provider.
 
-### Step 3: Start MongoDB
+### 4. Start MongoDB
 
-If MongoDB is installed through Homebrew on macOS, start it using:
+For a local MongoDB installation on macOS using Homebrew:
 
 ```bash
 mongod --config "$(brew --prefix)/etc/mongod.conf"
 ```
 
-Keep this terminal open while using the application.
-
-### Step 4: Seed the database
+### 5. Seed the database
 
 Open another terminal:
 
@@ -161,25 +186,21 @@ cd server
 npm run seed
 ```
 
-This creates the demo accounts, example tickets and knowledge articles.
-
-### Step 5: Start NexaDesk
+### 6. Start the application
 
 ```bash
 npm run dev
 ```
 
-The application will run at:
+Open the dashboard:
 
 http://localhost:5002
 
-Health check:
+API health endpoint:
 
 http://localhost:5002/api/health
 
 ## Demo Accounts
-
-The default seed configuration uses:
 
 | Role | Email |
 |---|---|
@@ -187,74 +208,56 @@ The default seed configuration uses:
 | Manager | manager@nexadesk.local |
 | Agent | agent@nexadesk.local |
 
-The default local-development password is `ChangeMe123!` unless changed in `.env`.
+The default seed password is `ChangeMe123!` unless changed in the environment configuration.
 
-Change these passwords before using the application beyond local development.
+Change demo passwords before using the application beyond local development.
 
-## API Endpoints
+## API Documentation
 
-### Authentication
+The backend API documentation is available in:
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| POST | `/api/auth/register` | Register account |
-| POST | `/api/auth/login` | Login |
-| GET | `/api/auth/me` | Get current user |
-| PATCH | `/api/auth/profile` | Update profile |
+`server/README.md`
 
-### Tickets
+It includes authentication, ticket, knowledge-base, team and health endpoints.
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/tickets` | List tickets |
-| POST | `/api/tickets` | Create ticket |
-| GET | `/api/tickets/:id` | Get ticket |
-| PATCH | `/api/tickets/:id` | Update ticket |
-| POST | `/api/tickets/:id/replies` | Add reply |
-| DELETE | `/api/tickets/:id` | Delete ticket |
+## AI Implementation
 
-### Knowledge Base
+NexaDesk uses lexical knowledge retrieval to identify relevant support articles. When an OpenAI API key is configured, the retrieved article content is passed to the model to generate an answer.
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/knowledge` | List articles |
-| POST | `/api/knowledge` | Create article |
-| POST | `/api/knowledge/ask` | Ask AI |
-| PATCH | `/api/knowledge/:id` | Update article |
-| DELETE | `/api/knowledge/:id` | Delete article |
+Without an API key, the application uses deterministic local fallback behavior.
 
-### Team
+The current implementation does not use vector-based semantic search.
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/team` | List team members |
-| PATCH | `/api/team/:id/role` | Update role |
-| PATCH | `/api/team/:id/status` | Update account status |
+## Security
 
-## AI Assistant Configuration
+- JWT-protected routes.
+- bcrypt password hashing.
+- Role-based authorization.
+- API rate limiting.
+- CORS configuration.
+- Audit logging.
+- Centralized error handling.
 
-The AI assistant can use local knowledge search without an OpenAI API key.
+## Future Improvements
 
-To enable OpenAI-generated answers, add a valid API key to `server/.env`:
+- Semantic retrieval using embeddings and vector search.
+- Email notifications and customer communication.
+- File attachments with secure storage.
+- Password reset and multi-factor authentication.
+- Advanced analytics and reporting.
+- Production deployment and monitoring.
+- Multi-tenant workspace support.
 
-```dotenv
-OPENAI_API_KEY=your_private_api_key
-OPENAI_MODEL=gpt-4o-mini
-```
+## Author
 
-Restart the backend after changing environment variables.
+**S. Hari Prasad Reddy**
 
-## Development Notes
+Computer Science and Engineering
 
-- The frontend is served by the Express application.
-- MongoDB stores users, tickets, knowledge articles and audit logs.
-- Authentication uses JWT bearer tokens.
-- Passwords are hashed before storage.
-- AI answers are grounded in retrieved knowledge articles.
-- Socket.IO broadcasts ticket updates to connected clients.
+GitHub: [harireddy-058](https://github.com/harireddy-058)
 
-## Limitations
+Project Repository: [NexaDesk AI Customer Support](https://github.com/harireddy-058/NexaDesk-AI-Customer-Support)
 
-This is a development project. It does not yet include production-grade email delivery, file attachments, password-reset email workflows, multi-tenant isolation, or vector-based semantic retrieval.
+---
 
-Before production deployment, add appropriate tenant isolation, secure session handling, stronger operational monitoring, backups, and deployment-specific security controls.
+*Developed as a full-stack AI-assisted customer support management project.*
